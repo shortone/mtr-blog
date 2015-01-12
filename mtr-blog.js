@@ -75,7 +75,7 @@ if (Meteor.isClient) {
       var content = event.target.content.value;
 
       Messages.insert({
-        author: "shortone@dictive.ch",
+        author: Meteor.user().username,
         content: content,
         createdAt: new Date(),
         discussion: this._id
@@ -102,6 +102,12 @@ if (Meteor.isClient) {
     },
     "click .remove-discussion": function() {
       console.log("Removing discussion " + this._id + "... or not!");
+    }
+  });
+
+  Template.message.helpers({
+    isAuthor: function() {
+      return this.author == Meteor.user().username;
     }
   });
 

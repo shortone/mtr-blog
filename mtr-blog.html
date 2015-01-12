@@ -98,7 +98,7 @@
 
 <template name="message">
   <div class="row">
-    <blockquote>
+    <blockquote class="{{#if isAuthor}}pull-right{{/if}}">
       <span><strong>{{author}}</strong> - {{createdAt}}</span>
       <p>{{content}}</p>
     </blockquote>
