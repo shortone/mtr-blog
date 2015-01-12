@@ -1,0 +1,110 @@
+<head>
+  <title>mtr-blog</title>
+  <link rel="stylesheet" href="./bootstrap.min.css" />
+</head>
+
+<body>
+  <div class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a href="/" class="navbar-brand">mtr-Blog</a>
+      </div>
+      <div class="navbar-collapse collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav">
+          <li>{{> loginButtons}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    {{#if currentUser}}
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="well">
+          <form class="form-horizontal create-discussion">
+            <div class="form-group">
+              <div class="col-lg-12">
+                <input type="text" class="form-control" name="speakers" placeholder="Speakers" />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-lg-12">
+                <input type="text" class="form-control" name="content" placeholder="Your message..." />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-lg-12">
+                <div class="pull-right">
+                  <button type="submit" class="btn btn-primary">Create</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+
+    {{#each discussions}}
+      {{> discussion}}
+    {{/each}}
+
+  </div>
+</body>
+
+<template name="discussion">
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="pull-right">
+          <span class="fa fa-plus show-add-speakers-form"> </span>
+          <span class="fa fa-pencil show-reply-form"> </span>
+          <span class="fa fa-trash-o remove-discussion"></span>
+        </div>
+        {{#each speakers}}{{> speaker}}{{/each}}
+      </div>
+      <div class="panel-body">
+        {{#if showAddSpeakersForm}}
+        <div class="well well-sm">
+          <form class="form-horizontal add-speakers">
+            <div class="form-group">
+              <div class="col-lg-12">
+                <input type="text" class="form-control" name="speakers" placeholder="Add Speakers" />
+              </div>
+            </div>
+          </form>
+        </div>
+        {{/if}}
+        {{#if showReplyForm}}
+        <div class="well well-sm">
+          <form class="form-horizontal reply">
+            <div class="form-group">
+              <div class="col-lg-12">
+                <input type="text" class="form-control" name="content" placeholder="Reply" />
+              </div>
+            </div>
+          </form>
+        </div>
+        {{/if}}
+        {{#each messages}}
+          {{>message}}
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</template>
+
+<template name="message">
+  <div class="row">
+    <blockquote>
+      <span><strong>{{author}}</strong> - {{createdAt}}</span>
+      <p>{{content}}</p>
+    </blockquote>
+  </div>
+</template>
+
+<template name="speaker">
+  <strong>{{this}} </strong>
+</template>
