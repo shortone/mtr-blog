@@ -19,6 +19,26 @@ function handleToggle(sessionKey, id) {
   Session.set(sessionKey, arr);
 }
 
+function createNewMessage(author, content, discussionId) {
+  Messages.insert({
+    author: author,
+    content: content,
+    createdAt: new Date(),
+    discussion: discussionId
+  });
+}
+
+function createNewDiscussion(author, speakers, content) {
+  Discussions.insert({
+    speakers: new Array(author, speakers),
+    createdAt: new Date()
+  }, function(err, id) {
+    if (!err) {
+      createNewMessage(author, content, id);
+    }
+  });
+}
+
 if (Meteor.isClient) {
   Session.set(SHOW_ADD_SPEAKERS, new Array());
   Session.set(SHOW_REPLY, new Array());
@@ -53,6 +73,14 @@ if (Meteor.isClient) {
       event.target.content.value = "";
 
       return false;
+    },
+    "click .show-new-message-form": function() {
+      $(".modal").modal("show");
+      return false;
+    },
+    "click .create-new-message": function() {
+      $(".modal").modal("hide");
+      console.log("this has been clicked");
     }
   });
 

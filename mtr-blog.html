@@ -5,19 +5,52 @@
 
 <body>
   <div class="navbar navbar-default">
+    <div class="navbar-header">
+      <a href="/" class="navbar-brand">mtr-Blog</a>
+    </div>
     <div class="container">
-      <div class="navbar-header">
-        <a href="/" class="navbar-brand">mtr-Blog</a>
-      </div>
-      <div class="navbar-collapse collapse navbar-responsive-collapse">
+      <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li>{{> loginButtons}}</li>
+          <li><a href="/" class="show-new-message-form"><span class="fa fa-plus"></span> New Message</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a>{{> loginButtons align="right"}}</a></li>
         </ul>
       </div>
     </div>
   </div>
 
   <div class="container">
+    <div class="modal new-message">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h4 class="modal-title">New Message</h4>
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal create-discussion">
+              <div class="form-group">
+                <label for="speakers" class="col-lg-2 control-label">Speakers</label>
+                <div class="col-lg-10">
+                  <input type="text" class="form-control" id="speakers" name="speakers" placeholder="Speakers" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="content" class="col-lg-2 control-label">Content</label>
+                <div class="col-lg-10">
+                  <textarea class="form-control" id="content" name="content" rows="3"></textarea>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary create-new-message">Create</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     {{#if currentUser}}
     <div class="row">
